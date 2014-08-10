@@ -13,14 +13,16 @@ levels(h_pc$Date)[levels(h_pc$Date)=="2/2/2007"] <- "02/02/2007"
 h_pc$date_time <- strptime(paste(h_pc$Date,h_pc$Time), 
                            "%d/%m/%Y %H:%M:%S")
 par(mfrow = c(2,2))
+op <- par(cex=.64)
 plot(h_pc$date_time,h_pc$Global_active_power,type='l',
      xlab='',ylab='Global Active Power (kilowatts)')
 plot(h_pc$date_time,h_pc$Voltage,type='l',xlab='datetime',ylab='Voltage')
 # Plot the 3rd multi-line graph
-plot(h_pc$date_time,h_pc$Sub_metering_1,type='l',xlab='',ylab='',col='black')
-lines(h_pc$date_time,h_pc$Sub_metering_2,type='l',xlab='',ylab='',col='red')
-lines(h_pc$date_time,h_pc$Sub_metering_3,type='l',xlab='',ylab='',col='blue')
-legend("topright",legend=colnames(h_pc)[7:9],col=c("black","red","blue"),bg='white')
+plot(h_pc$date_time,h_pc$Sub_metering_1,type='l',xlab='',ylab='Energy Sub-metering',col='black')
+lines(h_pc$date_time,h_pc$Sub_metering_2,type='l',col='red')
+lines(h_pc$date_time,h_pc$Sub_metering_3,type='l',col='blue')
+legend("topright",legend=colnames(h_pc)[7:9],col=c("black","red","blue"),bg='white',lwd=2,bty='n')
+#par(op)
 plot(h_pc$date_time,h_pc$Global_reactive_power,type='l',xlab='datetime',ylab='Global Reactive Power')
 dev.copy(png,file='./figure/plot4.png')
 dev.off()
